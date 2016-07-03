@@ -12,7 +12,7 @@
 
 	<packaging>jar</packaging>
 	<name>ApacheThriftSrvB</name>
-	<description>Ejemplo Apache Thrift</description>
+	<description>Ejemplo comunicaciones http</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -36,24 +36,8 @@
 			<artifactId>javax.ws.rs-api</artifactId>
 			<version>2.0.1</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.codehaus.jettison/jettison -->
-		<dependency>
-			<groupId>org.codehaus.jettison</groupId>
-			<artifactId>jettison</artifactId>
-			<version>1.3.7</version>
-		</dependency>
+
 		<!-- https://mvnrepository.com/artifact/com.sun.jersey/jersey-client -->
-		<dependency>
-			<groupId>com.sun.jersey</groupId>
-			<artifactId>jersey-client</artifactId>
-			<version>1.19.1</version>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/com.sun.jersey/jersey-json -->
-		<dependency>
-			<groupId>com.sun.jersey</groupId>
-			<artifactId>jersey-json</artifactId>
-			<version>1.19.1</version>
-		</dependency>
 	</dependencies>
 	<build>
 		<plugins>
