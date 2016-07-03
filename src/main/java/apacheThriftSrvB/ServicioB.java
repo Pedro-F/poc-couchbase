@@ -46,7 +46,7 @@ public class ServicioB {
 						 
 				 // Invocamos al servicioC para solicitar el stock de cada prenda
 				 RestTemplate restTemplate = new RestTemplate();
-				 RespuestaNoThriftStock outServicioC = restTemplate.postForObject("no-thrift-srvc:8080/servicioC", inServicioC, RespuestaNoThriftStock.class);
+				 RespuestaNoThriftStock outServicioC = restTemplate.postForObject("http://no-thrift-srvc:8080/servicioC", inServicioC, RespuestaNoThriftStock.class);
 				 //Traza de tiempo que marca la respuesta del servicioC
 				 System.out.println("Peticion Servicioc. ts = {" + (System.currentTimeMillis() - iniTime) + "}");
 				
