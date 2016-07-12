@@ -26,7 +26,6 @@ public class ServicioB {
 		prendas = PrendaDao.instance.getPrendas();
 	}
 
-
 	@RequestMapping(value = "/servicioB", method = RequestMethod.POST)
 	public @ResponseBody MensajeOutServicioNoThrift servicioB(@RequestBody MensajeInServicioNoThrift mensajeIn) {
 		
