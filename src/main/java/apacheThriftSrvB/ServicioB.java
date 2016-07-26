@@ -29,35 +29,33 @@ public class ServicioB {
 	@RequestMapping(value = "/servicioB", method = RequestMethod.POST)
 	public @ResponseBody MensajeOutServicioNoThrift servicioB(@RequestBody MensajeInServicioNoThrift mensajeIn) {
 		
-		// Variables
+		// Vars
 		MensajeOutServicioNoThrift respuestaNoThrift = new MensajeOutServicioNoThrift();
 		List<PrendaNoThrift> listadoPrendas = new ArrayList<PrendaNoThrift>();
 		long iniTime = System.currentTimeMillis();
 		
-		// Recorremos el catálogo de prendas DAO para seleccionar aquellas que se retornarán al servicioA
+		// Select prenda DAO which matches servicioA filter (type & color)
 		for(PrendaNoThrift prenda:prendas){
-			// Filtramos aquellas que son del tipo y color que solicita el servicioA 
+			// apply filter 
 			if(prenda.getTipo().equals(TipoNoThrift.findByValue(Integer.parseInt(mensajeIn.getCuerpo().get("TipoPrenda")))) 
 			    && prenda.getColor().toUpperCase().equals(mensajeIn.getCuerpo().get("Color").toUpperCase())){
 				
-				 //Convertimos la prenda en un bean de tipo RequestMessageStock necesaria para invocar al servicioC
+				 //Invoke sercicioC to obtain stock
 				 RequestMessageStock inServicioC = convertPrendaNoThrift_TO_RequestMessageStock(prenda, mensajeIn);
 						 
-				 // Invocamos al servicioC para solicitar el stock de cada prenda
 				 RestTemplate restTemplate = new RestTemplate();
 				 RespuestaNoThriftStock outServicioC = restTemplate.postForObject("http://no-thrift-srvc:8080/servicioC", inServicioC, RespuestaNoThriftStock.class);
 				
-				 // añadimos el stock y la prenda
+				 // add prenda & stock to listadoPrendas list
 				 prenda.setStock(outServicioC.getStock());	 
 				 listadoPrendas.add(prenda);
 			 
 			 }
 		}		 
 		
-		// Construimos el bean de respuesta al servicioA
+		// build servicioB output
 		respuestaNoThrift = buildMensajeOutServicioNoThrift(mensajeIn, listadoPrendas);
 		
-		// Traza de fin del servicioB
 		System.out.println("FIN ServicioB.  ts = {" + (System.currentTimeMillis() - iniTime) + "}");
 		
 		return respuestaNoThrift;
