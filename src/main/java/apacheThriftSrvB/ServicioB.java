@@ -34,7 +34,7 @@ public class ServicioB {
 		List<PrendaNoThrift> listadoPrendas = new ArrayList<PrendaNoThrift>();
 		long iniTime = System.currentTimeMillis();
 		
-		// Select prenda DAO which matches servicioA filter (type & color)
+		// Select prenda DAO which matches servicioA filter (type[name] & color)
 		for(PrendaNoThrift prenda:prendas){
 			// apply filter 
 			if(prenda.getTipo().equals(TipoNoThrift.findByValue(Integer.parseInt(mensajeIn.getCuerpo().get("TipoPrenda")))) 
