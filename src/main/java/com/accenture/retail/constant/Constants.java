@@ -21,4 +21,6 @@ public class Constants {
 	public static final long STOCK_DECREMENT = -1l;
 	public static final PersistTo PERSIST_LEVEL = PersistTo.ONE;
 	
+	public final static String PATH = "/stock";
+	
 }

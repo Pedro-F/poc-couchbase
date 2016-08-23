@@ -1,5 +1,6 @@
 package com.accenture.retail.web;
 
+import com.accenture.retail.constant.Constants;
 import com.accenture.retail.data.IRepository;
 import com.accenture.retail.domain.StockCounter;
 
@@ -9,11 +10,10 @@ import com.accenture.retail.domain.StockCounter;
  * @author Julián Rueda
  */
 public class StockController extends BaseController {
-	public final static String PATH = "/stock";
-
+	
 	public StockController(String baseURL, IRepository repo) {
 		super(repo);
 
-		mapRoutes(baseURL + "/stock", StockCounter.class);
+		mapRoutes(baseURL + Constants.PATH, StockCounter.class);
 	}
 }
