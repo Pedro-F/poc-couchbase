@@ -210,7 +210,7 @@ public class SpringApp {
 			String bucket = props.getProperty(BUCKET_KEY, BUCKET_DEFAULT_VALUE);
 			IRepository repo = new CouchbaseRepository(cluster, bucket);
 			StockAction stockAction = new StockAction(repo);
-			
+			System.out.println("Antes de getStock");
 			lTimeBefore = System.currentTimeMillis();
 			stock = stockAction.getStock(sDistibCenter, sProductID);
 			lTimeAfter = System.currentTimeMillis();
@@ -219,7 +219,7 @@ public class SpringApp {
 			e.printStackTrace();
 		}
 			
-		return "<br><h1><strong>CouchBase Client ==> CREATE STOCK </strong></h1></br>"
+		return "<br><h1><strong>CouchBase Client ==> GET STOCK </strong></h1></br>"
 			 + "<br>El stock del centro " + sDistibCenter + " para el producto " + sProductID + " es: " + stock +" Unidades.</br>"
 			 + "<br>MicroServicio ejecutado en " +  (lTimeAfter - lTimeBefore) +" Milisegundos</br>";
 		
