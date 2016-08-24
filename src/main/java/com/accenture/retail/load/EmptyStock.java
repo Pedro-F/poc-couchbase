@@ -29,7 +29,8 @@ public class EmptyStock {
 			StockAction stockAction = new StockAction(repo);
 			String productId = "product1";
 			String distributionCenter = "dc1";
-			stockAction.createStock(distributionCenter, productId, 501);
+			String res = stockAction.createStock(distributionCenter, productId, 501);
+			System.out.println(res);
 			MultiThreadEmptyStock e1 = new MultiThreadEmptyStock("1", stockAction, productId,distributionCenter);
 			MultiThreadEmptyStock e2 = new MultiThreadEmptyStock("2", stockAction, productId,distributionCenter);
 			MultiThreadEmptyStock e3 = new MultiThreadEmptyStock("3", stockAction, productId,distributionCenter);

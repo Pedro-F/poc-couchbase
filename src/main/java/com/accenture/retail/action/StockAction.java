@@ -70,7 +70,7 @@ public class StockAction implements IStockAction {
 			System.out.println("##########>> ID: " + counterId);
 			StockCounter stock = repo.findById(counterId, StockCounter.class);
 			
-			System.out.println("##########>> Sotock: " + stock.toString());
+			System.out.println("##########>> Stock: " + stock.toString());
 			
 			return String.valueOf(stock.getStock()-1);
 				
