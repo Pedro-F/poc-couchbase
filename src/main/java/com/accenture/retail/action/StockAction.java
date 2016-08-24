@@ -9,6 +9,7 @@ import static com.accenture.retail.constant.Constants.STOCK_INCREMENT;
 import java.util.Random;
 
 import com.accenture.retail.data.IRepository;
+import com.accenture.retail.domain.StockCounter;
 import com.accenture.retail.exception.ActionException;
 import com.accenture.retail.exception.EmptyStockException;
 import com.accenture.retail.exception.RepositoryRetriableException;
@@ -51,6 +52,28 @@ public class StockAction implements IStockAction {
 
 	public String createStock(String dc, String productId, long init) {
 		return repo.createOrUpdate(repo.generateCounterId(dc, productId), init, PERSIST_LEVEL);
+	}
+	
+	
+	/**
+	 * Metodo que recupera el stock de un producto en un centro de distribucion 
+	 * @param dc
+	 * @param productId
+	 * @return stock
+	 */
+	public String getStock(String dc, String productId) {
+
+		String counterId = "";
+		try {
+			counterId = repo.generateCounterId(dc, productId);
+			StockCounter stock = repo.findById(counterId, StockCounter.class);
+			
+			return String.valueOf(stock.getStock()-1);
+				
+		} catch (Exception e) {
+
+		}
+		throw new EmptyStockException(counterId);
 	}
 
 }

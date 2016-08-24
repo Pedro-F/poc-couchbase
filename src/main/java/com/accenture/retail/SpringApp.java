@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.accenture.retail.action.StockAction;
 import com.accenture.retail.data.CouchbaseRepository;
 import com.accenture.retail.data.IRepository;
+import com.accenture.retail.domain.StockCounter;
+import com.accenture.retail.exception.EmptyStockException;
 import com.accenture.retail.load.EmptyStock;
 import com.accenture.retail.load.LoadConsistentCounter;
 import com.couchbase.client.java.Cluster;
@@ -188,6 +190,41 @@ public class SpringApp {
 		+ "<br>MicroServicio ejecutado en " +  (lTimeAfter - lTimeBefore) +" Milisegundos</br>";
 		
 	}
+	
+	/**
+	 * Metodo que recupera el stock de un producto
+	 * @param sProductID
+	 * @return
+	 */
+	@RequestMapping("/getStock")
+	String getStockProduct(@RequestParam(value = "dc") String sDistibCenter,
+			 				@RequestParam(value = "pid") String sProductID) {
+		
+		String stock = "-1";
+		Properties props;
+		try {
+			props = loadProperties();
+			
+			String[] nodes = props.getProperty(NODES_KEY, NODES_DEFAULT_VALUE).split(",");
+			Cluster cluster = create(nodes);
+			String bucket = props.getProperty(BUCKET_KEY, BUCKET_DEFAULT_VALUE);
+			IRepository repo = new CouchbaseRepository(cluster, bucket);
+			StockAction stockAction = new StockAction(repo);
+			
+			lTimeBefore = System.currentTimeMillis();
+			stock = stockAction.getStock(sDistibCenter, sProductID);
+			lTimeAfter = System.currentTimeMillis();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+			
+		return "<br><h1><strong>CouchBase Client ==> CREATE STOCK </strong></h1></br>"
+			 + "<br>El stock del centro " + sDistibCenter + " para el producto " + sProductID + " es: " + stock +" Unidades.</br>"
+			 + "<br>MicroServicio ejecutado en " +  (lTimeAfter - lTimeBefore) +" Milisegundos</br>";
+		
+	}
+	
 	
 	/*******************************************************************/
 	/*******************************************************************/

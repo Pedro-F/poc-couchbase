@@ -7,5 +7,7 @@ public interface IStockAction {
 	public String decrementStock(String dc, String productId);
 	
 	public  String createStock(String dc, String productId, long init);
+	
+	public String getStock(String dc, String productId);
 
 }
