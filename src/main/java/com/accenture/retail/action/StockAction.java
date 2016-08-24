@@ -67,15 +67,17 @@ public class StockAction implements IStockAction {
 	public String getStock(String dc, String productId) {
 
 		String counterId = "";
+		long stock = 0;
+		
 		try {
 			System.out.println("generamos el ID");
 			counterId = repo.generateCounterId(dc, productId);
 			System.out.println("##########>> ID: " + counterId);
-			StockCounter stock = repo.findById(counterId, StockCounter.class);
+			stock = repo.findByIdPA(counterId);
 			
-			System.out.println("##########>> Stock: " + stock.toString());
+			System.out.println("##########>> Stock: " + stock);
 			
-			return String.valueOf(stock.getStock()-1);
+			return String.valueOf(stock-1);
 				
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -78,6 +78,21 @@ public class CouchbaseRepository implements IRepository {
 		System.out.println("Json doc: " + doc.toString());
 		return doc == null ? null : fromJsonDocument(doc, type);
 	}
+	
+	/**
+	  * @see Repository#findById(String, Class<? extends T>) findById
+	  */
+	
+	public long findByIdPA(String id) {
+		System.out.println("Antes del findByIDPA");
+		StringDocument doc = StringDocument.create(id);
+		doc = bucket.get(doc);
+		long cas = doc.cas();
+		
+		return doc == null ? null : cas;
+	}
+	
+
 
 	/**
 	  * @see Repository#create(T, Class<? extends T>) create

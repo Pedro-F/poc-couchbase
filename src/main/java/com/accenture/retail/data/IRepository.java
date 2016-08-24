@@ -29,6 +29,14 @@ public interface IRepository {
 	 * 	corresponds to the ID 
 	 */
 	<T extends Entity> T findById(String id, Class<? extends T> type);
+	
+	/**
+	 * Find stock of an entity by the specified ID and return it
+	 * 
+	 * @param id Unique ID of the entity
+	 * @return long stock corresponds to the ID 
+	 */
+	public long findByIdPA(String id);
 
 	/**
 	 * Persist a new instance of the specified type in the repository.
