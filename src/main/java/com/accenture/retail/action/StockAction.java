@@ -51,7 +51,7 @@ public class StockAction implements IStockAction {
 	}
 
 	public String createStock(String dc, String productId, long init) {
-		
+		System.out.println("#########>> ID create: " + repo.generateCounterId(dc, productId));
 		String res = repo.createOrUpdate(repo.generateCounterId(dc, productId), init, PERSIST_LEVEL);
 		System.out.println(res);
 		return res;

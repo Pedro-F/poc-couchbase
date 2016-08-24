@@ -73,7 +73,9 @@ public class CouchbaseRepository implements IRepository {
 	  */
 	
 	public <T extends Entity> T findById(String id, Class<? extends T> type) {
+		System.out.println("Antes del findByID");
 		JsonDocument doc = bucket.get(id);
+		System.out.println("Json doc: " + doc.toString());
 		return doc == null ? null : fromJsonDocument(doc, type);
 	}
 
