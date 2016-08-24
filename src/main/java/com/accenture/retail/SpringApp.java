@@ -13,7 +13,7 @@ import com.accenture.retail.load.LoadConsistentCounter;
 public class SpringApp {
 	
 	//variable vacía para invocar a los diferentes mains de la aplicación 
-	String [] args = {};
+	String [] emptyArgs = {};
 	//variables para controlar el tiempo de ejecucion
 	long lTimeBefore, lTimeAfter;
 	
@@ -25,7 +25,7 @@ public class SpringApp {
 	String homeMethod() {
 
 		lTimeBefore = System.currentTimeMillis();
-		Application.main(args);
+		Application.main(emptyArgs);
 		lTimeAfter = System.currentTimeMillis();
 		
 		return "<br><h1><strong>CouchBase Client ==> APPLICATION </strong></h1></br>"
@@ -43,7 +43,7 @@ public class SpringApp {
 	String emptyStockMethod() {
 		
 		lTimeBefore = System.currentTimeMillis();
-		EmptyStock.main(args);
+		EmptyStock.main(emptyArgs);
 		lTimeAfter = System.currentTimeMillis();
 		
 		return "<br><h1><strong>CouchBase Client ==> EMPTY STOCK </strong></h1></br>"
@@ -61,7 +61,7 @@ public class SpringApp {
 	String loadConsistentCounterMethod() {
 		
 		lTimeBefore = System.currentTimeMillis();
-		LoadConsistentCounter.main(args);
+		LoadConsistentCounter.main(emptyArgs);
 		lTimeAfter = System.currentTimeMillis();
 		
 		return "<br><h1><strong>CouchBase Client ==> LOAD CONSISTENT COUNTER </strong></h1></br>"
