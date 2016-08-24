@@ -78,6 +78,7 @@ public class StockAction implements IStockAction {
 			return String.valueOf(stock.getStock()-1);
 				
 		} catch (Exception e) {
+			e.printStackTrace();
 
 		}
 		throw new EmptyStockException(counterId);
