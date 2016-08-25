@@ -87,9 +87,9 @@ public class CouchbaseRepository implements IRepository {
 		System.out.println("Antes del findByIDPA");
 		StringDocument doc = StringDocument.create(id);
 		doc = bucket.get(doc);
-		long cas = doc.cas();
-		
-		return doc == null ? null : cas;
+//		long cas = doc.cas();
+//		long value = Long.parseLong(doc.content().toString());
+		return doc == null ? null : Long.parseLong(doc.content().toString());
 	}
 	
 
